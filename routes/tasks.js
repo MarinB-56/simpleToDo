@@ -22,6 +22,8 @@ const tasks = [
   }
 ]
 
+router.use(express.static('../public'));
+
 // Index
 router.get('/', (req, res) => {
   res.send(tasks);

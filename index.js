@@ -7,6 +7,7 @@ const tasksRoutes = require('./routes/tasks');
 
 app.use(morgan('dev'));
 
+app.use(express.static('public'));
 app.use('/tasks', tasksRoutes);
 
 app.get('/', (req, res) => {
