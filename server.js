@@ -3,15 +3,13 @@ const morgan = require('morgan');
 const app = express();
 const port = 3000;
 
-const tasksRoutes = require('./routes/tasks');
+const tasksRoutes = require('./src/routes/tasks');
 
 app.use(morgan('dev'));
 
-app.use(express.static('public'));
 app.use('/tasks', tasksRoutes);
 
 app.get('/', (req, res) => {
-  console.dir(req, { depth: null, colors: true });
   res.send("Coucouilles");
 })
 
