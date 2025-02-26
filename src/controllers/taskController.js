@@ -31,10 +31,6 @@ exports.getTaskById = (req, res) => { // SHOW - GET a precise task
   res.json(task);
 }
 
-exports.newTask = (req, res) => {
-  res.send(`New task`);
-}
-
 exports.createTask = (req, res) => { // CREATE - POST the new task
   // Récupération des données
   const { title } = req.body;
@@ -49,8 +45,4 @@ exports.updateTask = (req, res) => {
 
 exports.deleteTask = (req, res) => { // DELETE - DELETE a task
   res.send(`Task ${req.params.id} deleted`);
-}
-
-exports.editTask = (req, res) => {
-  res.send(`Edit task number ${req.params.id}`);
 }
