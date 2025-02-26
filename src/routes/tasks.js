@@ -5,12 +5,12 @@ const taskController = require('../controllers/taskController');
 
 // router.use(express.static('../public'));
 // INDEX - GET all tasks
-router.get('/', taskController.getAllTasks );
-
+router.route('/')
+  .get(taskController.getAllTasks )
+  .post(taskController.createTask );
 router.route('/:id')
   .get(taskController.getTaskById)
-  .post(taskController.createTask)
   .put(taskController.updateTask)
-  .delete(taskController.deleteTask)
+  .delete(taskController.deleteTask);
 
 module.exports = router;
