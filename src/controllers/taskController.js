@@ -27,7 +27,7 @@ exports.getTaskById = (req, res) => { // SHOW - GET a precise task
   const task = tasks.find(t => t.id === Number(req.params.id) )
 
   if (!task) {
-    res.status(404).json({ message: "Tâche non trouvée" })
+    return res.status(404).json({ message: "Tâche non trouvée" })
   }
 
   res.json(task);
@@ -41,7 +41,7 @@ exports.createTask = (req, res) => { // CREATE - POST the new task
   if (title && content) {
     tasks.push({ id: tasks.length + 1, title, content, done: false })
   } else {
-    res.status(400).json({ message: "Tâche non enregistrée, erreur de synthaxe"})
+    return res.status(400).json({ message: "Tâche non enregistrée, erreur de synthaxe"})
   }
   res.json(tasks[tasks.length - 1])
 }
@@ -53,7 +53,7 @@ exports.updateTask = (req, res) => {
 
   // Si la tâche n'existe pas
   if(!task) {
-    res.status(404).json({ message: "Tâche non trouvée"})
+    return res.status(404).json({ message: "Tâche non trouvée"})
   }
 
   // Si la tâche existe, modification des valeurs de la tâche
@@ -64,8 +64,12 @@ exports.updateTask = (req, res) => {
 
 exports.deleteTask = (req, res) => { // DELETE - DELETE a task
   // Récupération de la tâche
-  const id = tasks.findIndex(t => t.id === Number(req.params.id))
-  tasks.splice(id, 1);
+  const taskIndex = tasks.findIndex(t => t.id === Number(req.params.id))
 
+  if(taskIndex === -1){
+    return res.status(404).json({ message: "Tâche non trouvée" });
+  }
+
+  tasks.splice(id, 1);
   res.status(200).send({message: "Tâche supprimée avec succès"});
 }
